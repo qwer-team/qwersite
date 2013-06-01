@@ -87,12 +87,11 @@
                     </div>
                 </div>
 
-                {% render "MainSiteBundle:Default:rightblock" 
-                    with { 
+                {% render (controller("MainSiteBundle:Default:rightblock",{ 
                         'parent_id' : entity.parent, 
                         'entity': entity, 
                         'link': 'news' 
-                    } 
+                    } ))
                 %}
             </div>
              

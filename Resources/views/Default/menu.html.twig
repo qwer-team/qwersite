@@ -5,7 +5,7 @@
                     <img src="/bundles/mainsite/image/logo-qwer.png" alt="Case" title="">
                 </a>
             </div>
-                 {% render "MainSiteBundle:Default:languages" with { "routing" : routing, 'req' : req, 'locale': locale }  %}
+                 {% render (controller("MainSiteBundle:Default:languages", { "routing" : routing, 'req' : req, 'locale': locale }))  %}
                 <nav class="primary">
                     <ul id="topnav" class="sf-menu">
                     {% for entity in entities %}

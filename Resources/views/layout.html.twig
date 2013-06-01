@@ -49,7 +49,7 @@
         <header id="header">
             
             {% set routing = app.request.attributes.get('_route') %}
-            {% render "MainSiteBundle:Default:menu" with {"routing" : routing, "req" : app.request}  %}
+            {% render(controller("MainSiteBundle:Default:menu", {"routing" : routing, "req" : app.request}))  %}
         </header>
         {% endblock %}
         {% block body %} 
@@ -59,7 +59,7 @@
     </div>
     {% block footer %}
     <footer id="footer">
-           {% render "MainSiteBundle:Default:footer" %}
+           {% render (controller("MainSiteBundle:Default:footer")) %}
     </footer>
     {% endblock %}
 </body>
