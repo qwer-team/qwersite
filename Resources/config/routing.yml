@@ -1,0 +1,20 @@
+site_index:
+    pattern: /
+    defaults: { _controller: MainSiteBundle:Default:index, _locale: %locale% }
+    
+site:
+    prefix:   /{_locale}
+    resource: "@MainSiteBundle/Controller/"
+    type:     annotation
+    defaults: {_locale: %locale% }
+    requirements:
+      _locale : \w{2}        
+
+news:
+    prefix:   /{_locale}/news/
+    resource: "@MainSiteBundle/Controller/NewsController.php"
+    type:     annotation
+    #defaults: { _controller: MainSiteBundle:News:index, _locale: %locale% }
+    requirements:
+      _locale : \w{2}        
+      

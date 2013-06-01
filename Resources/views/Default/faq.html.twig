@@ -1,0 +1,29 @@
+{% extends 'MainSiteBundle::layout.html.twig' %}
+{% block javascript %}
+    {{ parent()}}
+    <script src="{{ asset ( 'bundles/mainsite/js/jq.scrollTo-min.js') }}"></script>
+    <script>
+        $(document).ready(function(){
+            $('#scrollPanel a').click(function(){
+            var str=$(this).attr('href');
+            $.scrollTo(str,500);
+            return false;
+            });
+        })
+    </script>
+{% endblock %}
+{% block css %}
+    {{parent()}}
+    <link rel="stylesheet" href="{{ asset ( 'bundles/mainsite/css/style_faq.css' ) }}" />
+{% endblock %}
+{% block menu %}
+    {{parent()}}
+{% endblock %}
+{% block body %}
+ 
+<selector class="faq">
+    <div class="bg_shadow"></div>
+    
+    {{ entity.content | raw }}
+</selector>
+{% endblock %}

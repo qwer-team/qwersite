@@ -1,0 +1,103 @@
+{% extends 'MainSiteBundle::layout.html.twig' %}
+
+{% block body %}
+
+<div class="primary_content_wrap">
+    <div class="container_12 clearfix">
+        <div class="grid_12">
+            <div class="indent">
+
+                <div id="content" class="grid_9 alpha">
+
+                    <div id="post-60" class="post-60 extra type-extra status-publish hentry post">
+
+                        {% for onenews in news %}
+
+                            <article id="post-42" class="post-42 post type-post status-publish format-standard hentry category-in-sagittis-mi-rhoncus category-sed-tincidunt-mauris tag-at tag-curabitur tag-euismod tag-odio tag-sem tag-sit tag-tristique tag-ut tag-vel post-holder cat-5-id cat-1-id">
+                                <div class="post-container">
+                                    {% set onenewsT = onenews.translate( locale ) %}
+                                    {% set title = onenewsT.getTitle() %}
+                                    {% set link  = url( 'onenews', { 'translit': onenewsT.getTranslit() } ) %}
+
+                                    <h2>
+                                        <a href="{{ link }}" title="{{ title }}" rel="bookmark">
+                                            {{ title }}
+                                        </a>
+                                    </h2>
+
+                                    <div class="post-meta">
+                                        <div class="fleft">
+                                            {% if entity.datecreate %}
+                                                {%set month = entity.datecreate | date('F')%}
+                                                {% set date = entity.datecreate | date('d, Y H:i') %}
+                                            {% endif %}
+                                            <time datetime="2012-02-08T08:12">{{ month | trans }} {{ date }}</time>{#, by 
+                                                <a href="" title="Posts by admin" rel="author">
+                                                    Admin
+                                                </a>
+                                            #}
+
+                                        </div>
+                                        <div class="fright">
+                                        </div>
+                                    </div><!--.post-meta-->
+
+                                    <div class="post-block">
+                                        <figure class="featured-thumbnail">
+                                            <span class="img-wrap">
+                                                <a href="{{ link }}">
+                                                    {% if onenews.iconImage is not null %}
+                                                        <img width="90" height="80" class = 'menu_sys_iconImage' style = 'z-index: 0;' 
+                                                              src = '{{ vich_uploader_asset( onenews, 'iconImage' ) }}?{{ random() }}'/>
+                                                    {% else %}
+                                                        <img style = 'z-index: 0;' src = '/bundles/itcadmin/images/m_menu.gif' />
+                                                    {% endif %}
+
+                                                </a>
+                                            </span>
+                                        </figure> 
+                                        {{ onenewsT.getDescription() |slice( 0, 300 )| raw }}...
+                                        <a href="{{ link }}">Read More</a>
+                                        
+                                    </div>
+                                    
+                                </div>
+                                <div class="line_bottom"></div>
+                            </article>
+
+                        {% endfor %}
+
+
+{#
+                        <div id="disqus_thread"></div>
+
+                        <script type="text/javascript">            
+                            var disqus_shortname = 'demo1qwercomua';    
+                            (function() {         
+                                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;  
+                                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';   
+                                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq); 
+                            })();         
+                        </script>        
+                        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>      
+                        
+
+                        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>         
+#}
+                    </div>
+                </div>
+
+                {% render "MainSiteBundle:Default:rightblock" 
+                    with { 
+                        'parent_id' : entity.parent, 
+                        'entity': entity, 
+                        'link': 'news' 
+                    } 
+                %}
+            </div>
+             
+            </div>
+          </div>
+     </div>
+</div>
+{% endblock %}

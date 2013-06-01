@@ -1,0 +1,37 @@
+<aside id="sidebar" class="grid_3 omega">
+<div class="indent-left">
+    <div id="archives-3" class="widget">
+    <h3>{{ entity.translate(locale).getTitle }}</h3>
+    <ul>
+        
+        {% for menu in menus %}
+            {% set menuT = menu.translate( locale ) %}
+          
+            {% set cur = entity.id == menu.id ? 'current': '' %}
+            {% set linknews = '/'~locale~'/'~link~'/'~menuT.getTranslit() %}
+
+            <li>
+                <a class="{{ cur }}" href="{{ linknews }}"> {{ menuT.getTitle() }}</a>
+            </li>
+            
+        {% endfor %}
+    </ul>
+    </div>
+    <div id="text-4" class="widget">
+        <h3>{{  "contacts_title" | trans }}</h3>
+            <div class="textwidget">
+                {{  "contacts" | trans }}
+            </div>
+    </div>
+    <div id="tag_cloud-2" class="widget">
+        <h3>{{  "cloud_tags" | trans }}</h3>
+        <div class="tagcloud">
+            {% for keyword in keywords %}
+                <a class="tag-link-25" style="font-size: 8pt;" title="1 topic" href="/{{ locale }}/tag/{{ keyword.translate(locale).getTranslit() }}">
+                  {{ keyword.translate(locale).getKeyword()}}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</aside>

@@ -1,0 +1,14 @@
+<ul class="languages" >
+    <a href="#">
+        <li id="" class="flag-{{ locale | upper }} transparent60">
+        </li>
+    </a>
+
+    {% for key, url in urls %}
+        <a href="{{ url }}">
+            <li id="" class="flag-{{ key | upper }}">
+            </li>
+         </a>
+    {% endfor %}
+
+</ul>
