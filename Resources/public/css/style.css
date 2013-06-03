@@ -112,6 +112,7 @@ article, aside, dialog, figure, footer, header, hgroup, nav, section {
     position: absolute;
     top: -999em;
     width: 157px;
+    margin-left: -10px;
 
 }
 .sf-menu ul li {
