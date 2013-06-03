@@ -322,6 +322,7 @@ class DefaultController extends ControllerHelper
         
         return array( 
             'entity' => $entity,
+            'locale' => $locale,
         );
     }
     /**
