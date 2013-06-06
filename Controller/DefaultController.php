@@ -54,6 +54,7 @@ class DefaultController extends ControllerHelper
                         ->setParameter('locale', $locale);
 
         $images = $queryBuilder->getQuery()->execute();
+        var_dump($images);
 
         $queryBuilder = $em->getRepository('ItcAdminBundle:Menu\Menu')
                         ->createQueryBuilder('M')
@@ -303,11 +304,14 @@ class DefaultController extends ControllerHelper
      * @Route("/faq", name="faq")
      * @Template()
      */
-    public function faqAction(){
+    public function faqAction($translit){
         
         $em = $this->getDoctrine()->getManager();
         $locale =  LanguageHelper::getLocale();
-//        
+//        $res = $httpKernel->forward( $controller, array(
+//                "translit" => $translit,
+//                "entity"   => $entity,
+//            ));
 //        $queryBuilder = $em->getRepository('ItcAdminBundle:Menu\Menu')
 //                        ->createQueryBuilder('M')
 //                        ->select( 'M' )
@@ -323,6 +327,7 @@ class DefaultController extends ControllerHelper
         return array( 
             'entity' => $entity,
             'locale' => $locale,
+            'translit' => $translit,
         );
     }
     /**

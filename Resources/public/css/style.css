@@ -52,6 +52,10 @@ html, body {
     left: 0;
     position: absolute;
     top: 0;
+    width: 315px;
+    height: 128px;
+    background: url(/bundles/mainsite/image/logo-qwer.png);
+    
 }
 .grid_1, .grid_2, .grid_3, .grid_4, .grid_5, .grid_6, 
 .grid_7, .grid_8, .grid_9, .grid_10, .grid_11, .grid_12 {
@@ -171,7 +175,7 @@ ul.sf-menu li li li:hover ul, ul.sf-menu li li li.sfHover ul {
     line-height: 30px;
     margin: 0px;
     overflow: hidden;
-    padding: 0 6px;
+    padding: 0 10px;
     text-transform: uppercase;
 }
 .sf-menu li li {
