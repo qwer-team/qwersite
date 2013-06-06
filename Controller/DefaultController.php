@@ -54,7 +54,7 @@ class DefaultController extends ControllerHelper
                         ->setParameter('locale', $locale);
 
         $images = $queryBuilder->getQuery()->execute();
-        var_dump($images);
+        
 
         $queryBuilder = $em->getRepository('ItcAdminBundle:Menu\Menu')
                         ->createQueryBuilder('M')
