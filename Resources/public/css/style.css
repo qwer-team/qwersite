@@ -2552,7 +2552,7 @@ h3 {
     padding: 0;
 }
 .primary_content_wrap ul li .current {
-    color: red;
+    color: #3586a8; font-weight: bold;
 }
 .primary_content_wrap ul li a {
     text-decoration: none;
