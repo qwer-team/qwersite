@@ -31,7 +31,8 @@
                         <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>         
                     </div>        
                 </div>
-             {% include "MainSiteBundle:Default:rightblock.html.twig" %}   
+          other
+                    {% render (controller("MainSiteBundle:Default:rightblock",{entity: entity} ))  %}
             </div>
           </div>
      </div>

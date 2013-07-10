@@ -1,14 +1,14 @@
 <aside id="sidebar" class="grid_3 omega">
 <div class="indent-left">
     <div id="archives-3" class="widget">
-    <h3>{{ entity.translate(locale).getTitle }}</h3>
+    <h3>{{ glob.translate(locale).getTitle }}</h3>
     <ul>
         
         {% for menu in menus %}
             {% set menuT = menu.translate( locale ) %}
           
             {% set cur = entity.id == menu.id ? 'current': '' %}
-            {% set linknews = '/'~locale~'/'~link~'/'~menuT.getTranslit() %}
+            {% set linknews = '/'~locale~'/'~menuT.getTranslit() %}
 
             <li>
                 <a class="{{ cur }}" href="{{ linknews }}"> {{ menuT.getTitle() }}</a>
@@ -20,7 +20,7 @@
     <div id="text-4" class="widget">
         <h3>{{  "contacts_title" | trans }}</h3>
             <div class="textwidget">
-                {{  "contacts" | trans }}
+                {{  "contacts" | trans | raw }}
             </div>
     </div>
     <div id="tag_cloud-2" class="widget">

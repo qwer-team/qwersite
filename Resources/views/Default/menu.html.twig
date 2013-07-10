@@ -11,12 +11,12 @@
                     {% if entity.translate(locale).getTitle %}
                     <li id="menu-item" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item 
                         page_item page-item current_page_item menu-item">
-                        {% if entity.routing and entity.routing != 'faq' %}
+                       {#% if entity.routing and entity.routing != 'faq' %}
                             {% set link = entity.routing %}
                         {% else %}
                             {% set link = entity.translate(locale).getTranslit %}
-                        {% endif %}
-                        <a href="/{{ locale }}/{{ link }}">
+                        {% endif %#}  
+                        <a href="/{{ locale }}/{{ entity.translate(locale).getTranslit }}">
                             {{entity.translate(locale).getTitle}}
                         </a>
                         {% set parent = entity.id %}                            

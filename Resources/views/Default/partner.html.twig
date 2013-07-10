@@ -27,13 +27,7 @@
                         </article>
                     </div>
                 </div>
-                {% render(controller("MainSiteBundle:Default:rightblock")) 
-                    with { 
-                        'parent_id' : entity.parent, 
-                        'entity': entity, 
-                        'link': 'news' 
-                    } 
-                %}
+               {% render (controller("MainSiteBundle:Default:rightblock",{ entity: entity} )) %}
             </div>
              
             </div>

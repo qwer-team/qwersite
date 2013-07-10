@@ -9,56 +9,38 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Itc\AdminBundle\Tools\LanguageHelper;
 use Main\SiteBundle\Tools\ControllerHelper;
-
 /**
- * News controller.
+ * AllNews controller.
  * Routing registered in routing.yml
  */
-class NewsController extends ControllerHelper //Controller
+class AllNewsController extends Controller //Controller
 {
     private $menu = array( 
         'ItcAdminBundle:Menu\Menu',
         'ItcAdminBundle:Menu\MenuTranslation'
     );
     /**
-     * @Route("/", name="news")
+     * @Route("/allnew", name="allnews")
      * @Template()
      */
     public function indexAction($translit)
     {
-        $locale =  LanguageHelper::getLocale();
-
-       //$wheres[] = "M.routing = :routing ";
-       // $parameters["routing"] = "news";
-        
-        $wheres[] = "M.translit = :translit ";
+        $locale =  $this->getRequest()->getLocale();
+//echo( $locale );
+ $wheres[] = "M.translit = :translit ";
         $parameters["translit"] =$translit;
         $orderby = array( "M.date_create", "DESC" );
-        $entity = $this->getEntities( $this->menu, $wheres, $parameters, $orderby )
-                       ->getOneOrNullResult();
-
+        
+        $repo = $this->getDoctrine()->getManager()->getRepository('ItcAdminBundle:Menu\Menu');
+        
+        list($entity, $entities, $children) = $repo->getMenuLevel2($translit);
         return array( 
+            'entities' => $entities,
             'entity' => $entity,
-            'news'   => $entity->getChildren(),
+            'news'   => $children,
             'locale' => $locale
         );
+        //return array();
     }
-
-    /**
-     * @Route("/{translit}", name="onenews")
-     * @Template()
-     */
-    public function onenewsAction( $translit )
-    {
-
-        $locale =  LanguageHelper::getLocale();
-
-        $entity = $this->getEntityTranslit( $this->menu, $translit )
-                       ->getOneOrNullResult();
-
-        return array( 
-            'entity' => $entity,
-            'locale' => $locale
-        );
-    }
+ 
 }
