@@ -53,7 +53,7 @@
                     </a>
                     <div class="picture">
                         <a href="/{{ locale }}/{{ child.translate(locale).getTranslit }}">
-                            <img width="107" height="107" src="/images/icons/{{ asset(child.icon) }}" 
+                            <img src="/images/icons/{{ asset(child.icon) }}" 
                                  class="attachment-post-thumbnail wp-post-image" alt="img-1" title="img-1" />              			                  
                         </a>
                     </div>
@@ -64,12 +64,47 @@
         </div>   
     </div>
                 
-    <div style="padding-bottom: 5%;">
+    <!--<div style="padding-bottom: 5%;">
         {% autoescape false %}
             {{ entity.translate(locale).getContent() }}
         {% endautoescape %}
+    </div>-->
+             
+              <!-- end of portfolio_cycle -->
+                
+{% if news|length > 0 %}                
+<div id="my_postwidget-2">
+    <h2>{{ "Last news" | trans }}</h2>						
+    <div class="showcase-content" style="width:700px;float:left">
+            <!--<h5>{{ news.0.translate(locale).getTitle() }}</h5>-->
+            {% autoescape false %}
+           {{ entity.translate(locale).getContent() }}
+            {% endautoescape %}
     </div>
-             <div id="my_cyclewidget-2">                  
+    <div class="showcase-thumbnail-container" style="float: left; height: 400px; overflow: hidden; margin-left: 62px;">
+    <div style="float:left; width: 238px;">
+        
+        <div class="showcase-thumbnail-button-backward"><span class="showcase-thumbnail-vertical"><!--<span>Up</span>--></span></div>
+        <div class="showcase-thumbnail-restriction" style="overflow: hidden; position: relative; height: 242px;">
+            <div class="showcase-thumbnail-wrapper showcase-thumbnail-wrapper-vertical" style="position: relative; top: 0px;">
+        {% for new in news %}
+            <div class="showcase-thumbnail" style="padding: 5px 0;height: 70px;">
+                <a href="/{{ locale }}/{{ new.translate(locale).getTranslit }}">{{ new.translate(locale).getTitle }}</a>
+                <br />
+                {{ new.translate(locale).getDescription|slice(1, 50)}}...
+            </div>
+        {% endfor %}
+        
+    </div>
+        
+        </div>
+        <div class="showcase-thumbnail-button-forward"><span class="showcase-thumbnail-vertical"><!--<span>Down</span>--></span></div>
+    </div>
+</div>
+</div>
+{% endif %}  
+              
+<div id="my_cyclewidget-2">                  
                  <h2>{{ "Last works" | trans }}</h2>											                 
                   
     <div id="slider-code">
@@ -96,35 +131,11 @@
             </ul>
 	</div>
     </div>
-    </div>
-              <!-- end of portfolio_cycle -->
-                
-{% if news|length > 0 %}                
-<div id="my_postwidget-2">
-    <h2>{{ "Last news" | trans }}</h2>						
-    <div class="showcase-content" style="width:700px;float:left">
-            <h5>{{ news.0.translate(locale).getTitle() }}</h5>
-            {% autoescape false %}
-            {{ news.0.translate(locale).getContent }}
-            {% endautoescape %}
-    </div>
-    <div style="float:left; width: 238px;">
-        {% for new in news %}
-            <div class="showcase-thumbnail" style="padding: 5px 0;height: 70px;">
-                <a href="/{{ locale }}/{{ new.translate(locale).getTranslit }}">{{ new.translate(locale).getTitle }}</a>
-                <br />
-                {{ new.translate(locale).getDescription|slice(1, 50)}}...
-            </div>
-        {% endfor %}
-    </div>
-</div>	       
-{% endif %}                
+    </div>              
 								
 </div>
-
                 <!-- Link under post cycle -->
-								
-								
+						
               </div>			 
            
             	<div class="clear"></div>
