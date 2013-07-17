@@ -83,7 +83,7 @@ class DefaultController extends ControllerHelper
                 ->innerJoin('M.parent', 'P', 'WITH', "P.routing IN ( 'news', 'blog') ")
                 ->leftJoin('M.translations', 'T', 'WITH', "T.locale = :locale")
                 ->orderBy('M.date_create', 'DESC')
-                ->setMaxResults(3)
+                ->setMaxResults(6)
                 ->setParameter('locale', $locale);
 
         $news = $queryBuilder->getQuery()->execute();

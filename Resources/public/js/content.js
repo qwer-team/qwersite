@@ -73,13 +73,15 @@ $( document ).ready(function() {
             social_tools: false
     });    
 
-
-
-
-
-
-
 });
+
+$('.showcase-thumbnail-button-forward').live('click', function(){
+    $('.showcase-thumbnail-wrapper').css('top', '-330px');
+});
+$('.showcase-thumbnail-button-backward').live('click', function(){
+    $('.showcase-thumbnail-wrapper').css('top', '0px');
+});
+
 
 $('#back-top a').click(function () {        
         $('body,html').stop(false, false).animate({

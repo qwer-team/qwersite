@@ -61,8 +61,8 @@ html, body {
 .grid_7, .grid_8, .grid_9, .grid_10, .grid_11, .grid_12 {
     display: inline;
     float: left;
-    margin-left: -50px;
-    margin-right: 10px;
+/*    margin-left: -50px;*/
+/*    margin-right: 10px;*/
     position: relative;
 }
 .grid_12{
@@ -343,7 +343,7 @@ h2 {
     letter-spacing: -1px;
     line-height: 1.2em;
     margin: 0 0 24px;
-    padding: 0 0 12px;
+    padding: 0 0 25px;
 }
 #slider-wrapper .slider-bg {
     background: none repeat scroll 0 0 #F1F1F1;
@@ -2493,6 +2493,7 @@ a {
 .primary_content_wrap ul {
     margin: 0;
     padding: 0 0 18px;
+    margin-left: 63px;
 }
 .primary_content_wrap ul li {
     background: url("/bundles/mainsite/images/marker.png") no-repeat scroll 0 2px transparent;
@@ -2542,7 +2543,7 @@ h3 {
     margin-left: -10px;    
 }
 .container_12 .grid_3 {
-    width: 270px;
+    width: 250px;
 }
 .omega {
     margin-right: 0;
@@ -2747,3 +2748,34 @@ element.style {
     cursor: pointer;
     padding-left: 14px;
 }
+
+.fix_height {
+    height: 100px;
+}
+
+.showcase-thumbnail-button-forward {
+background: url(/bundles/mainsite/image/bottom.png) no-repeat 0% 0%;
+width: 109px;
+height: 49px;
+position: absolute;
+/*top: 286px;*/
+right: 128px;
+cursor: pointer;
+}
+
+.showcase-thumbnail-button-backward {
+background: url(/bundles/mainsite/image/top.png) no-repeat 0% 0%;
+width: 110px;
+height: 49px;
+position: absolute;
+top: 799px;
+right: 18px;
+cursor: pointer;
+}
+.showcase-thumbnail-button-backward:hover {
+background-position: 0% -49px;
+}
+.showcase-thumbnail-button-forward:hover {
+background-position: 0% -49px;
+}
+
