@@ -644,8 +644,16 @@ class DefaultController extends ControllerHelper
      */
     public function languagesAction($req, $routing)
     {
+    
+          
+        
         $em = $this->getDoctrine()->getManager();
         $em->clear();
+        
+        $request = $this->container->get('request');
+$routeName = $request->get('_route'); 
+        
+        
         if ($routing == "site_index") {
             $routing = "index";
         } else if (!isset($routing)) {
@@ -663,6 +671,7 @@ class DefaultController extends ControllerHelper
             $params = $out[1];
         }
 
+        
         $urls = array();
         $locale = LanguageHelper::getLocale();
         $languages = LanguageHelper::getLanguages();

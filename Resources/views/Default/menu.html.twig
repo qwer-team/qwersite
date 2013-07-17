@@ -6,7 +6,7 @@
             </a>
                  {% render (controller("MainSiteBundle:Default:languages", { "routing" : routing, 'req' : req, 'locale': locale }))  %}
                 <nav class="primary">
-                    <ul id="topnav" class="sf-menu">
+                <ul id="topnav" class="sf-menu">
                     {% for entity in entities %}
                     {% if entity.translate(locale).getTitle %}
                     <li id="menu-item" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item 

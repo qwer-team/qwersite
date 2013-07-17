@@ -1,9 +1,9 @@
 {% extends 'MainSiteBundle::layout.html.twig' %}
-{% block menu %}
+{#% block menu %}
     {{parent()}}
-{% endblock %}
+{% endblock %#}
 {% block body %}
-    
+   
     <section id="slider-wrapper">
             <a id="playPauseButton" class="show" href="#" data-link="#index_slider">
                 <span class="hide-text" style="opacity: 1;">{{ "Hide Slideshow" | trans }}</span>
@@ -133,9 +133,5 @@
       </div>
       
 {% endblock %}
-      {#
-{% block footer %}
-      {{ parent() }}
-{% endblock %}      
-#}
+ 
       
