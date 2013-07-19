@@ -19,26 +19,34 @@ class NewsController extends ControllerHelper //Controller
     private $menu = array( 
         'ItcAdminBundle:Menu\Menu',
         'ItcAdminBundle:Menu\MenuTranslation'
-    );
+    );//@Route("/{page}", name="news", requirements={"page" = "\d+"}, defaults={page"=1})
     /**
+     * 
      * @Route("/", name="news")
      * @Template()
      */
-    public function indexAction($translit)
+    public function indexAction($translit, $entity, $page)
     {
+        $coulonpage = 2;
         $locale =  $this->getRequest()->getLocale();
-    
-        $wheres[] = "M.translit = :translit ";
-        $parameters["translit"] =$translit;
-        $orderby = array( "M.date_create", "DESC" );
         
         $repo = $this->getDoctrine()->getManager()->getRepository('ItcAdminBundle:Menu\Menu');
         
-        list($entity, $children) = $repo->getMenuWithChildren($translit);
+        $qb = $repo->getChildrenQb($entity);
+        $paginator = $this->get('knp_paginator');
+        $pageNumber = $this->get('request')->query->get('page', $page);
+        $children = $paginator->paginate(
+            $qb,
+            $pageNumber/*page number*/,
+            $coulonpage/*limit per page*/ //array('distinct' => false)
+        );
+        
         return array( 
             'entity' => $entity,
             'news'   => $children,
-            'locale' => $locale
+            'locale' => $locale,
+            'page'      => $page,
+            'coulonpage' => $coulonpage,
         );
     }
 
