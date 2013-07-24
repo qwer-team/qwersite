@@ -319,7 +319,7 @@ class DefaultController extends ControllerHelper
 
             $httpKernel = $this->container->get('http_kernel');
             $res = $httpKernel->forward("MainSiteBundle:Default:content", array(
-                "translit" => $translit
+                "translit" => $translit,
                     ));
         }
 
@@ -434,14 +434,16 @@ class DefaultController extends ControllerHelper
         if ($locale == $deflocale) {
             $entity = $em->getRepository('ItcAdminBundle:Keyword\Keyword')
                             ->createQueryBuilder('M')
-                            ->select('M')
+                            ->select('M', 'K')
+                            ->leftJoin('M.menus', 'K')
                             ->where("M.translit = :translit ")
                             ->setParameter('translit', $keyword)
                             ->getQuery()->getOneOrNullResult();
         } else {
             $entity = $em->getRepository('ItcAdminBundle:Keyword\Keyword')
                             ->createQueryBuilder('M')
-                            ->select('M, T')
+                            ->select('M, T, K')
+                            ->leftJoin('M.menus', 'K')
                             ->leftJoin('M.translations', 'T', 'WITH', "T.locale = :locale")
                             ->setParameter('locale', $locale)
                             ->where("T.property='translit'")
@@ -453,8 +455,9 @@ class DefaultController extends ControllerHelper
         $ent = $em->getRepository('ItcAdminBundle:Menu\Menu')->findOneByRouting('allnews');
         $entities = $entity->getMenus();
         return array('entity' => $ent,
+            'keyword' => $entity,
             'locale' => $locale,
-            'entities' => $entities
+            'entities' => $entities,
         );
     }
 
@@ -557,7 +560,7 @@ class DefaultController extends ControllerHelper
      * Lists all Menu entities.
      * @Template()
      */
-    public function menuAction($routing, $req)
+    public function menuAction($routing, $req, $entity)
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -601,6 +604,7 @@ class DefaultController extends ControllerHelper
             'routing' => $routing,
             'req' => $req,
             'childs' => $child_entities,
+            'entity' => $entity,
         );
     }
 
@@ -642,7 +646,7 @@ class DefaultController extends ControllerHelper
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @Template()
      */
-    public function languagesAction($req, $routing)
+    public function languagesAction($req, $routing, $locale, $entityParam)
     {
     
           
@@ -682,13 +686,22 @@ $routeName = $request->get('_route');
                 continue;
             }
             $values = array();
+            $noTranslit = false;
             foreach ($params as $param) {
                 $value = $req->get($param);
                 if ($param == "translit") {
 
                     $entity = $this->getEntityTranslit($this->menu, $value)
                             ->getOneOrNullResult();
-                    $value = $entity->translate($lang)->getTranslit();
+                    if($entity){
+                        $value = $entity->translate($lang)->getTranslit();
+                    } else {
+                        $value = "";
+                    }
+                    
+                    if($value == ""){
+                        $noTranslit = true;
+                    }
                 } else
                 if ($param == "_locale") {
                     $value = $lang;
@@ -703,12 +716,16 @@ $routeName = $request->get('_route');
             if (!$wasLocale) {
                 $values["_locale"] = $lang;
             }
+            if($noTranslit){
+               continue; 
+            }
             $url = $this->generateUrl($routing, $values, true);
             $urls[$lang] = $url;
         }
         return array(
             "locale" => $locale,
-            "urls" => $urls
+            "urls" => $urls,
+            'entity' => $entityParam
         );
     }
 

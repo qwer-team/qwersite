@@ -6,11 +6,13 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="/image/favicon.ico" />
     <title>
+     {% if entity is not empty %}
        {% if entity.translate(locale).getMetatitle is not empty %}
             {{ entity.translate(locale).getMetatitle }}
         {% else %}
             translate(locale).getTitle
         {% endif %}  
+     {% endif %} 
     </title>
     {% block javascript %}
 
@@ -49,7 +51,7 @@
         <header id="header">
             
             {% set routing = app.request.attributes.get('_route') %}
-            {% render(controller("MainSiteBundle:Default:menu", {"routing" : routing, "req" : app.request}))  %}
+            {% render(controller("MainSiteBundle:Default:menu", {"routing" : routing, "req" : app.request, "entity": entity, "_locale": app.request.locale}))  %}
         </header>
         {% endblock %}
         {% block body %} 
@@ -59,7 +61,7 @@
     </div>
     {% block footer %}
     <footer id="footer">
-           {% render (controller("MainSiteBundle:Default:footer")) %}
+           {% render (controller("MainSiteBundle:Default:footer",{ "_locale": app.request.locale})) %}
     </footer>
     {% endblock %}
 </body>

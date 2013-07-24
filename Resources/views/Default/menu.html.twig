@@ -4,7 +4,7 @@
                 <div class="logo">
                 </div>
             </a>
-                 {% render (controller("MainSiteBundle:Default:languages", { "routing" : routing, 'req' : req, 'locale': locale }))  %}
+                 {% render (controller("MainSiteBundle:Default:languages", { "routing" : routing, 'req' : req, '_locale': locale, 'locale': locale, 'entityParam': entity }))  %}
                 <nav class="primary">
                 <ul id="topnav" class="sf-menu">
                     {% for entity in entities %}

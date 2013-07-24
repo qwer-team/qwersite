@@ -32,7 +32,7 @@
                     </div>        
                 </div>
             
-             {% render (controller("MainSiteBundle:Default:rightblock",{ entity: entity} )) %}
+             {% render (controller("MainSiteBundle:Default:rightblock",{ entity: entity, "_locale": app.request.locale} )) %}
             </div>
           </div>
      </div>

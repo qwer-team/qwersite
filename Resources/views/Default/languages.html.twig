@@ -5,10 +5,12 @@
     </a>
 
     {% for key, url in urls %}
+        {% if entity is not empty and entity.translate(key).translit != '' %}
         <a href="{{ url }}">
             <li id="" class="flag-{{ key | upper }}">
             </li>
          </a>
+        {% endif %}
     {% endfor %}
 
 </ul>
