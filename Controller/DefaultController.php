@@ -287,10 +287,12 @@ class DefaultController extends ControllerHelper
     }
 
     /**
-     * @Route("/{translit}", name="other")
+     * @Route("/{translit}/{page}", name="other",
+     * requirements={"page" = "\d+"},
+     * defaults={"page"=1})
      * @Template()
      */
-    public function otherAction($translit)
+    public function otherAction($page, $translit)
     {
 
         $query = $this->getEntityTranslit($this->menu, $translit);
@@ -308,6 +310,7 @@ class DefaultController extends ControllerHelper
             $res = $httpKernel->forward($controller, array(
                 "translit" => $translit,
                 "entity" => $entity,
+                "page"  => $page,
                     ));
         } /*elseif($entity->getParent()->getRouting() == 'news'){
             $httpKernel = $this->container->get('http_kernel');
